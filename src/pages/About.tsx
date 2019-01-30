@@ -22,7 +22,9 @@ const Social = styled.div`
   margin-right: 6px;
 `;
 
-const renderProfile = p => (
+type Profile = typeof data.basics.profiles[0];
+
+const renderProfile = (p: Profile) => (
   <Social key={p.url}>
     <Link href={p.url} target="_blank">
       {p.network}

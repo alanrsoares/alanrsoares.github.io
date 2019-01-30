@@ -4,19 +4,19 @@ import { Zap } from "styled-icons/octicons/Zap";
 import { MarkGithub } from "styled-icons/octicons/MarkGithub";
 import { Profile } from "styled-icons/icomoon/Profile";
 
-import { Pages } from "../types";
+import { Pages, PageConfig } from "../types";
 
 import About from "./About";
 import Work from "./Work";
 import Labs from "./Labs";
 
-const renderIcon = icon => styled(icon)`
+const renderIcon = (icon: React.ComponentType) => styled(icon)`
   fill: white;
   height: 24px;
   margin-right: 8px;
 `;
 
-export default {
+const pages: { [key in Pages]: PageConfig } = {
   [Pages.About]: {
     tabTitle: "About me",
     render: About,
@@ -33,3 +33,5 @@ export default {
     icon: renderIcon(Beaker)
   }
 };
+
+export default pages;

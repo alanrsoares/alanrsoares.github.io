@@ -24,8 +24,8 @@ const CardBody = styled.div`
 `;
 
 interface Props {
-  children: React.Node;
-  heading: React.Node;
+  children: React.ReactNode;
+  heading: React.ReactNode;
 }
 
 export default function Card(props: Props) {

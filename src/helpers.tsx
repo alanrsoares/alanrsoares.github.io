@@ -8,10 +8,10 @@ export const renderRows = (rows: string[]) =>
     </span>
   ));
 
-export function throttle(timeout: number, fn: (...any) => any) {
+export function throttle(timeout: number, fn: (...any: any[]) => any) {
   let lastExecuted = Date.now();
 
-  return (...args) => {
+  return (...args: any[]) => {
     const now = Date.now();
     const delta = now - lastExecuted;
 

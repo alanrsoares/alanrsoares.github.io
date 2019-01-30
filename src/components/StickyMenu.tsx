@@ -1,9 +1,9 @@
 import React, { useRef, useEffect, useState } from "react";
 
-import { Menu, MenuContent, Tab } from "./styled";
+import { Menu, MenuContent } from "./styled";
 
 interface Props {
-  children: React.Node;
+  children: React.ReactNode;
 }
 
 export default function StickyMenu(props: Props) {
@@ -12,9 +12,7 @@ export default function StickyMenu(props: Props) {
 
   useEffect(() => {
     const handleScrollChange = () => {
-      const { offsetTop } = menuRef.current;
-
-      if (window.pageYOffset >= offsetTop) {
+      if (menuRef.current && window.pageYOffset >= menuRef.current.offsetTop) {
         setSticky(true);
       } else {
         setSticky(false);

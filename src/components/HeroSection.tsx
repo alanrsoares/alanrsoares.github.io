@@ -9,7 +9,11 @@ import "../styles.css";
 
 import pages from "../pages";
 
-export default function HeroSection(props) {
+interface Props {
+  onButtonClick(): void;
+}
+
+export default function HeroSection(props: Props) {
   return (
     <Hero>
       <HeroContent>

@@ -52,7 +52,11 @@ export const Sub = styled.div`
   text-shadow: 0 4px 16px rgba(0, 0, 0, 0.6);
 `;
 
-export const Menu = styled.div`
+interface MenuProps {
+  sticky: boolean;
+}
+
+export const Menu = styled.div<MenuProps>`
   background: ${props =>
     props.sticky ? "rgba(0, 0, 0, 0.4)" : "rgba(0, 0, 0, 0.2)"};
   padding: 10px;
@@ -71,7 +75,11 @@ export const MenuContent = styled.div`
   padding: 0 8px;
 `;
 
-export const Tab = styled.div`
+interface TabProps {
+  active: boolean;
+}
+
+export const Tab = styled.div<TabProps>`
   display: flex;
   font-weight: bold;
   text-transform: uppercase;
