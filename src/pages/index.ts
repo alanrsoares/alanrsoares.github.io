@@ -1,13 +1,13 @@
-import styled from "@emotion/styled";
+import styled from "styled-components";
 import { Beaker } from "styled-icons/octicons/Beaker";
 import { MarkGithub } from "styled-icons/octicons/MarkGithub";
 import { Profile } from "styled-icons/icomoon/Profile";
 
-import { Pages, PageConfig } from "../types";
+import { Pages, PageConfig } from "types";
 
-import About from "./About";
-import Work from "./Work";
-import Labs from "./Labs";
+import About from "pages/About";
+import Work from "pages/Work";
+import Labs from "pages/Labs";
 
 const renderIcon = (icon: React.ComponentType) => styled(icon)`
   fill: white;
