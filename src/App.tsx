@@ -1,10 +1,10 @@
 import React, { useRef, useEffect, useState } from "react";
 
-import { Pages } from "./types";
+import { Pages } from "types";
 
-import { AppContainer, Page, HeroSection, Tab, StickyMenu } from "./components";
+import { AppContainer, Page, HeroSection, Tab, StickyMenu } from "components";
 
-import pages from "./pages";
+import pages from "pages";
 
 const renderTab = (key: Pages, page: Pages, onClick: (key: Pages) => void) => {
   const activePage = pages[key];

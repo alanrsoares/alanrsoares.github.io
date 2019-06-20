@@ -1,4 +1,4 @@
-export * from "./styled";
-export { default as StickyMenu } from "./StickyMenu";
-export { default as Card } from "./Card";
-export { default as HeroSection } from "./HeroSection";
+export * from "components/styled";
+export { default as StickyMenu } from "components/StickyMenu";
+export { default as Card } from "components/Card";
+export { default as HeroSection } from "components/HeroSection";

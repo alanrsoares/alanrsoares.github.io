@@ -1,9 +1,9 @@
 import React from "react";
-import styled from "@emotion/styled";
+import styled from "styled-components";
 
-import data from "../resume";
-import { renderRows } from "../helpers";
-import { Content, Card } from "../components";
+import resume from "resume";
+import { renderRows } from "helpers";
+import { Content, Card } from "components";
 
 const List = styled.div`
   display: flex;
@@ -22,7 +22,7 @@ const Social = styled.div`
   margin-right: 6px;
 `;
 
-type Profile = typeof data.basics.profiles[0];
+type Profile = typeof resume.basics.profiles[0];
 
 const renderProfile = (p: Profile) => (
   <Social key={p.url}>
@@ -35,9 +35,9 @@ const renderProfile = (p: Profile) => (
 export default function About() {
   return (
     <Content>
-      <Card heading="Summary">{renderRows(data.basics.summary)}</Card>
+      <Card heading="Summary">{renderRows(resume.basics.summary)}</Card>
       <Card heading="Find me">
-        <List>{data.basics.profiles.map(renderProfile)}</List>
+        <List>{resume.basics.profiles.map(renderProfile)}</List>
       </Card>
     </Content>
   );

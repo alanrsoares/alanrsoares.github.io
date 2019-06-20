@@ -1,6 +1,6 @@
 import React, { useRef, useEffect, useState } from "react";
 
-import { Menu, MenuContent } from "./styled";
+import { Menu, MenuContent } from "components/styled";
 
 interface Props {
   children: React.ReactNode;

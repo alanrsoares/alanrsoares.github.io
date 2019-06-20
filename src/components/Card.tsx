@@ -1,9 +1,9 @@
-import * as React from "react";
-import styled from "@emotion/styled";
+import React from "react";
+import styled from "styled-components";
 
 const CardContainer = styled.div`
   border-radius: 4px;
-  background-color: white;
+  background-color: #f5f5f5;
   margin: 0.5em 1em;
   box-shadow: 0 12px 24px -5px rgba(0, 0, 0, 0.3);
 `;

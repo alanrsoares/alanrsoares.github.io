@@ -1,13 +1,8 @@
 import React from "react";
 
-import data from "../resume";
-import { Pages } from "../types";
+import data from "resume";
 
-import { Hero, HeroContent, HeroButton, Title, Sub } from "../components";
-
-import "../styles.css";
-
-import pages from "../pages";
+import { Hero, HeroContent, HeroButton, Title, Sub } from "components";
 
 interface Props {
   onButtonClick(): void;

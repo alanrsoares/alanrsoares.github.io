@@ -1,6 +1,5 @@
 import styled from "@emotion/styled";
 import { Beaker } from "styled-icons/octicons/Beaker";
-import { Zap } from "styled-icons/octicons/Zap";
 import { MarkGithub } from "styled-icons/octicons/MarkGithub";
 import { Profile } from "styled-icons/icomoon/Profile";
 
@@ -16,7 +15,7 @@ const renderIcon = (icon: React.ComponentType) => styled(icon)`
   margin-right: 8px;
 `;
 
-const pages: { [key in Pages]: PageConfig } = {
+const pages: Record<Pages, PageConfig> = {
   [Pages.About]: {
     tabTitle: "About me",
     render: About,
