@@ -10,7 +10,7 @@ export default defineConfig({
       components: path.resolve(__dirname, "./src/components"),
       pages: path.resolve(__dirname, "./src/pages"),
       types: path.resolve(__dirname, "./src/types"),
-      resume: path.resolve(__dirname, "./src/resume.ts"),
+      site: path.resolve(__dirname, "./src/site.ts"),
       helpers: path.resolve(__dirname, "./src/helpers.tsx"),
       src: path.resolve(__dirname, "./src"),
     },

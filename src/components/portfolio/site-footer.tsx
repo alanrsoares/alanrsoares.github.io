@@ -1,6 +1,6 @@
 import tw from "@styled-cva/react";
 import { Button } from "components/ui/button";
-import { BASICS } from "resume";
+import { SITE } from "site";
 
 const Footer = tw.footer`
   flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3
@@ -12,15 +12,15 @@ export function SiteFooter() {
   return (
     <Footer>
       <span>
-        © {new Date().getFullYear()} {BASICS.name}
+        © {new Date().getFullYear()} {SITE.name}
       </span>
       <Button
         variant="link"
         size="sm"
         className="h-auto px-0"
-        render={<a href={BASICS.website} />}
+        render={<a href={SITE.website} />}
       >
-        {BASICS.website.replace(/^https?:\/\//, "")}
+        {SITE.website.replace(/^https?:\/\//, "")}
       </Button>
     </Footer>
   );

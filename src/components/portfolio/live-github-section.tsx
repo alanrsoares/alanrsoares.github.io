@@ -1,4 +1,5 @@
 import { GitFork, Star } from "lucide-react";
+import { Card, CardContent } from "components/ui/card";
 import { CardGrid, PortfolioSection } from "components/portfolio/section";
 import { ProjectCard } from "components/portfolio/project-card";
 import { SkeletonCard } from "components/portfolio/skeleton-card";
@@ -7,13 +8,18 @@ import type { GhRepo } from "src/github";
 type LiveGithubSectionProps = {
   repos: GhRepo[];
   loading: boolean;
+  fromManifest?: boolean;
 };
 
-export function LiveGithubSection({ repos, loading }: LiveGithubSectionProps) {
+export function LiveGithubSection({
+  repos,
+  loading,
+  fromManifest = true,
+}: LiveGithubSectionProps) {
   return (
     <PortfolioSection
       id="live-github"
-      title="Live GitHub projects"
+      title="Active repositories"
       count={
         loading ? "Loading…" : `${repos.length.toString().padStart(2, "0")} active`
       }
@@ -23,7 +29,8 @@ export function LiveGithubSection({ repos, loading }: LiveGithubSectionProps) {
           ? Array.from({ length: 4 }).map((_, i) => (
               <SkeletonCard key={`loading-${i}`} />
             ))
-          : repos.map((repo) => (
+          : repos.length > 0
+            ? repos.map((repo) => (
               <ProjectCard
                 key={repo.id}
                 title={repo.name}
@@ -51,7 +58,16 @@ export function LiveGithubSection({ repos, loading }: LiveGithubSectionProps) {
                   </div>
                 }
               />
-            ))}
+            ))
+            : (
+              <Card className="md:col-span-2">
+                <CardContent className="py-6 text-sm text-muted-foreground">
+                  {fromManifest
+                    ? "No active repos in the index yet."
+                    : "Couldn't load GitHub data — run build to refresh the index."}
+                </CardContent>
+              </Card>
+            )}
       </CardGrid>
     </PortfolioSection>
   );

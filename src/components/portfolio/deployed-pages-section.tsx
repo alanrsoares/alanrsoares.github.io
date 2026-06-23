@@ -7,16 +7,18 @@ import type { DeployedPageRepo } from "src/github";
 type DeployedPagesSectionProps = {
   deployedPages: DeployedPageRepo[];
   loading: boolean;
+  fromManifest?: boolean;
 };
 
 export function DeployedPagesSection({
   deployedPages,
   loading,
+  fromManifest = true,
 }: DeployedPagesSectionProps) {
   return (
     <PortfolioSection
       id="deployed-pages"
-      title="Deployed GitHub Pages"
+      title="Live demos"
       count={
         loading
           ? "Scanning…"
@@ -52,11 +54,9 @@ export function DeployedPagesSection({
             : (
                 <Card className="md:col-span-2">
                   <CardContent className="py-6 text-sm text-muted-foreground">
-                    No project pages found at{" "}
-                    <span className="font-mono text-foreground">
-                      alanrsoares.github.io/&lt;repo&gt;
-                    </span>
-                    .
+                    {fromManifest
+                      ? "No live project sites in the index yet."
+                      : "Couldn't load GitHub data to scan for project sites — run build to refresh the index."}
                   </CardContent>
                 </Card>
               )}

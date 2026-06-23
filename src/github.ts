@@ -7,8 +7,11 @@ export interface GhRepo {
   forks_count: number;
   language: string;
   fork: boolean;
+  archived?: boolean;
   pushed_at: string;
   updated_at: string;
+  has_pages?: boolean;
+  homepage?: string | null;
 }
 
 export type RankedGhRepo = GhRepo & { recentCommitCount: number };
@@ -42,7 +45,7 @@ export async function fetchOwnerRepos(
   }
 
   const data: GhRepo[] = await response.json();
-  return data.filter((repo) => !repo.fork);
+  return data.filter((repo) => !repo.fork && !repo.archived);
 }
 
 async function fetchRecentCommitCount(
@@ -121,16 +124,101 @@ export function projectPagesUrl(repoName: string): string {
   return `${GITHUB_PAGES_ORIGIN}/${repoName}/`;
 }
 
-export async function repoHasProjectPage(
-  repoName: string,
-  signal: AbortSignal
-): Promise<boolean> {
-  if (repoName === GITHUB_PAGES_USER_SITE_REPO) {
-    return false;
+export function resolveProjectPagesUrl(repo: GhRepo): string {
+  const homepage = repo.homepage?.trim();
+  if (
+    homepage &&
+    homepage.includes("alanrsoares.github.io/") &&
+    homepage !== GITHUB_PAGES_ORIGIN &&
+    homepage !== `${GITHUB_PAGES_ORIGIN}/`
+  ) {
+    return homepage.endsWith("/") ? homepage : `${homepage}/`;
   }
 
-  const url = projectPagesUrl(repoName);
+  return projectPagesUrl(repo.name);
+}
 
+export async function fetchActiveReposManifest(
+  signal: AbortSignal,
+): Promise<GhRepo[] | null> {
+  try {
+    const response = await fetch("/active-repos.json", { signal });
+    if (!response.ok) {
+      return null;
+    }
+
+    const data: unknown = await response.json();
+    return Array.isArray(data) ? (data as GhRepo[]) : null;
+  } catch {
+    return null;
+  }
+}
+
+export async function fetchDeployedPagesManifest(
+  signal: AbortSignal,
+): Promise<DeployedPageRepo[] | null> {
+  try {
+    const response = await fetch("/deployed-pages.json", { signal });
+    if (!response.ok) {
+      return null;
+    }
+
+    const data: unknown = await response.json();
+    return Array.isArray(data) ? (data as DeployedPageRepo[]) : null;
+  } catch {
+    return null;
+  }
+}
+
+export async function filterDeployedPages(
+  repos: GhRepo[],
+  signal: AbortSignal,
+): Promise<DeployedPageRepo[]> {
+  const candidates = repos.filter(
+    (repo) =>
+      repo.name !== GITHUB_PAGES_USER_SITE_REPO &&
+      (repo.has_pages ?? false),
+  );
+
+  return sweepProjectPages(candidates, signal);
+}
+
+export async function sweepProjectPages(
+  repos: GhRepo[],
+  signal: AbortSignal,
+): Promise<DeployedPageRepo[]> {
+  const deployed: DeployedPageRepo[] = [];
+
+  for (let i = 0; i < repos.length; i += PAGE_SWEEP_CONCURRENCY) {
+    if (signal.aborted) {
+      break;
+    }
+
+    const batch = repos.slice(i, i + PAGE_SWEEP_CONCURRENCY);
+    const results = await Promise.all(
+      batch.map(async (repo) => {
+        const pagesUrl = resolveProjectPagesUrl(repo);
+        const live = await repoPageIsLive(pagesUrl, signal);
+        if (!live) {
+          return null;
+        }
+
+        return {
+          ...repo,
+          pagesUrl,
+        };
+      }),
+    );
+
+    deployed.push(
+      ...results.filter((repo): repo is DeployedPageRepo => repo !== null),
+    );
+  }
+
+  return deployed.sort(compareByRecency);
+}
+
+async function repoPageIsLive(url: string, signal: AbortSignal): Promise<boolean> {
   try {
     const response = await fetch(url, {
       method: "HEAD",
@@ -142,41 +230,4 @@ export async function repoHasProjectPage(
   } catch {
     return false;
   }
-}
-
-export async function sweepProjectPages(
-  repos: GhRepo[],
-  signal: AbortSignal
-): Promise<DeployedPageRepo[]> {
-  const candidates = repos.filter(
-    (repo) => repo.name !== GITHUB_PAGES_USER_SITE_REPO
-  );
-  const deployed: DeployedPageRepo[] = [];
-
-  for (let i = 0; i < candidates.length; i += PAGE_SWEEP_CONCURRENCY) {
-    if (signal.aborted) {
-      break;
-    }
-
-    const batch = candidates.slice(i, i + PAGE_SWEEP_CONCURRENCY);
-    const results = await Promise.all(
-      batch.map(async (repo) => {
-        const live = await repoHasProjectPage(repo.name, signal);
-        if (!live) {
-          return null;
-        }
-
-        return {
-          ...repo,
-          pagesUrl: projectPagesUrl(repo.name),
-        };
-      })
-    );
-
-    deployed.push(
-      ...results.filter((repo): repo is DeployedPageRepo => repo !== null)
-    );
-  }
-
-  return deployed.sort(compareByRecency);
 }

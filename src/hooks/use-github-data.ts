@@ -1,11 +1,13 @@
 import { useEffect, useState } from "react";
-import { BASICS } from "resume";
+import { SITE } from "site";
 import {
   type DeployedPageRepo,
   type GhRepo,
+  fetchActiveReposManifest,
+  fetchDeployedPagesManifest,
   fetchOwnerRepos,
+  filterDeployedPages,
   rankReposByActivity,
-  sweepProjectPages,
 } from "src/github";
 
 export function useGitHubData() {
@@ -13,21 +15,47 @@ export function useGitHubData() {
   const [deployedPages, setDeployedPages] = useState<DeployedPageRepo[]>([]);
   const [loading, setLoading] = useState(true);
   const [pagesLoading, setPagesLoading] = useState(true);
+  const [reposFromManifest, setReposFromManifest] = useState(true);
+  const [pagesFromManifest, setPagesFromManifest] = useState(true);
 
   useEffect(() => {
     const controller = new AbortController();
 
     async function fetchGitHubData() {
-      const owner = BASICS.profiles[0].username;
+      const owner = SITE.handle;
 
       try {
-        const active = await fetchOwnerRepos(owner, controller.signal);
-        const [ranked, deployed] = await Promise.all([
-          rankReposByActivity(active, owner, controller.signal),
-          sweepProjectPages(active, controller.signal),
+        const [activeManifest, deployedManifest] = await Promise.all([
+          fetchActiveReposManifest(controller.signal),
+          fetchDeployedPagesManifest(controller.signal),
         ]);
-        setRepos(ranked);
-        setDeployedPages(deployed);
+
+        if (activeManifest) {
+          setRepos(activeManifest);
+          setReposFromManifest(true);
+        }
+
+        if (deployedManifest) {
+          setDeployedPages(deployedManifest);
+          setPagesFromManifest(true);
+        }
+
+        const needsLiveRepos = !activeManifest || !deployedManifest;
+        const active = needsLiveRepos
+          ? await fetchOwnerRepos(owner, controller.signal)
+          : [];
+
+        if (!activeManifest) {
+          const ranked = await rankReposByActivity(active, owner, controller.signal);
+          setRepos(ranked);
+          setReposFromManifest(false);
+        }
+
+        if (!deployedManifest) {
+          const deployed = await filterDeployedPages(active, controller.signal);
+          setDeployedPages(deployed);
+          setPagesFromManifest(false);
+        }
       } catch (err) {
         if (err instanceof DOMException && err.name === "AbortError") {
           return;
@@ -46,5 +74,12 @@ export function useGitHubData() {
     };
   }, []);
 
-  return { repos, deployedPages, loading, pagesLoading };
+  return {
+    repos,
+    deployedPages,
+    loading,
+    pagesLoading,
+    reposFromManifest,
+    pagesFromManifest,
+  };
 }

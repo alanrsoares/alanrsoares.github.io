@@ -1,6 +1,6 @@
 import tw from "@styled-cva/react";
 import { StatCard } from "components/portfolio/stat-card";
-import { STATIC_STATS } from "resume";
+import { STATIC_STATS } from "site";
 
 const StatsGrid = tw.div`
   grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-6

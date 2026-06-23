@@ -1,0 +1,74 @@
+[
+  {
+    "id": 1149349599,
+    "name": "yappr",
+    "description": "100% local voice assistant — Kokoro TTS, Whisper STT, Ollama chat, and MCP tools via CLI and desktop app.",
+    "html_url": "https://github.com/alanrsoares/yappr",
+    "stargazers_count": 2,
+    "forks_count": 0,
+    "language": "TypeScript",
+    "fork": false,
+    "pushed_at": "2026-06-23T22:50:14Z",
+    "updated_at": "2026-06-23T22:59:05Z"
+  },
+  {
+    "id": 1246194166,
+    "name": "onrails",
+    "description": "Railway-oriented TypeScript",
+    "html_url": "https://github.com/alanrsoares/onrails",
+    "stargazers_count": 1,
+    "forks_count": 1,
+    "language": "TypeScript",
+    "fork": false,
+    "pushed_at": "2026-06-23T02:43:04Z",
+    "updated_at": "2026-06-23T02:43:08Z"
+  },
+  {
+    "id": 39484621,
+    "name": "prelude-js",
+    "description": "functional/point-free utils for JavaScript",
+    "html_url": "https://github.com/alanrsoares/prelude-js",
+    "stargazers_count": 100,
+    "forks_count": 5,
+    "language": "TypeScript",
+    "fork": false,
+    "pushed_at": "2026-06-23T02:23:07Z",
+    "updated_at": "2026-06-23T02:22:52Z"
+  },
+  {
+    "id": 770115636,
+    "name": "styled-cva",
+    "description": "A typesafe, class-variance-authority-based, styled-components-like library for authoring React components",
+    "html_url": "https://github.com/alanrsoares/styled-cva",
+    "stargazers_count": 3,
+    "forks_count": 0,
+    "language": "TypeScript",
+    "fork": false,
+    "pushed_at": "2026-06-18T04:20:50Z",
+    "updated_at": "2026-06-18T04:20:54Z"
+  },
+  {
+    "id": 1276538779,
+    "name": "koans",
+    "description": "Interactive browser koans for learning JavaScript, TypeScript, ClojureScript, CoffeeScript, Gleam, and Civet.",
+    "html_url": "https://github.com/alanrsoares/koans",
+    "stargazers_count": 0,
+    "forks_count": 0,
+    "language": "TypeScript",
+    "fork": false,
+    "pushed_at": "2026-06-23T07:35:34Z",
+    "updated_at": "2026-06-23T22:59:05Z"
+  },
+  {
+    "id": 146703462,
+    "name": "re-reduced",
+    "description": "Signal-backed, typed state-machine + effect container for component logic in React & Preact — fine-grained reactivity, effects-as-data, zero-any.",
+    "html_url": "https://github.com/alanrsoares/re-reduced",
+    "stargazers_count": 16,
+    "forks_count": 3,
+    "language": "TypeScript",
+    "fork": false,
+    "pushed_at": "2026-06-22T00:28:09Z",
+    "updated_at": "2026-06-22T00:02:23Z"
+  }
+]

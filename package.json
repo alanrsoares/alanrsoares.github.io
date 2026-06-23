@@ -2,7 +2,7 @@
   "name": "personal-website",
   "version": "1.0.0",
   "type": "module",
-  "description": "My personal website and portfolio",
+  "description": "Open-source showcase — repositories and live demos from GitHub",
   "keywords": [],
   "main": "src/index.tsx",
   "homepage": "https://alanrsoares.github.io",
@@ -32,7 +32,7 @@
   },
   "scripts": {
     "dev": "vite",
-    "build": "tsc && vite build",
+    "build": "bun run scripts/generate-github-manifests.ts && tsc && vite build",
     "preview": "vite preview"
   }
 }

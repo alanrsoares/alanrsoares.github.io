@@ -19,7 +19,7 @@
       "components/*": ["src/components/*"],
       "pages/*": ["src/pages/*"],
       "types": ["src/types.ts"],
-      "resume": ["src/resume.ts"],
+      "site": ["src/site.ts"],
       "helpers": ["src/helpers.tsx"],
       "src/*": ["src/*"]
     }

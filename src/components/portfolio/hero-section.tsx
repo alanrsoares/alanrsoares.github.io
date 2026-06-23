@@ -1,8 +1,8 @@
 import tw from "@styled-cva/react";
-import { ExternalLink, FileText, Github, Linkedin, Mail } from "lucide-react";
+import { ExternalLink, Github, Linkedin, Mail } from "lucide-react";
 import Avatar from "components/avatar";
 import { Button } from "components/ui/button";
-import { BASICS } from "resume";
+import { SITE } from "site";
 
 const Hero = tw.header`
   relative grid gap-10 overflow-visible
@@ -37,66 +37,59 @@ const AvatarWrap = tw.div`
   lg:mx-0 lg:justify-self-end lg:justify-end
 `;
 
-function profileIcon(network: string) {
-  switch (network) {
-    case "GitHub":
-      return <Github data-icon="inline-start" aria-hidden="true" />;
-    case "LinkedIn":
-      return <Linkedin data-icon="inline-start" aria-hidden="true" />;
-    default:
-      return <ExternalLink data-icon="inline-start" aria-hidden="true" />;
-  }
-}
-
 export function HeroSection() {
   return (
     <Hero>
       <HeroCopy>
-        <Eyebrow>Portfolio</Eyebrow>
-        <Title>{BASICS.name}</Title>
-        <Subtitle>{BASICS.label}</Subtitle>
-        <Bio>{BASICS.summary}</Bio>
+        <Eyebrow>Open source</Eyebrow>
+        <Title>{SITE.name}</Title>
+        <Subtitle>{SITE.tagline}</Subtitle>
+        <Bio>{SITE.summary}</Bio>
         <LinkGroup>
           <Button
             variant="outline"
             size="sm"
             render={
+              <a href={SITE.github} target="_blank" rel="noopener noreferrer" />
+            }
+          >
+            <Github data-icon="inline-start" aria-hidden="true" />@{SITE.handle}
+          </Button>
+          <Button
+            variant="outline"
+            size="sm"
+            render={
               <a
-                href={`mailto:${BASICS.email}`}
+                href={SITE.website}
                 target="_blank"
                 rel="noopener noreferrer"
               />
             }
           >
-            <Mail data-icon="inline-start" aria-hidden="true" />
-            Email
+            <ExternalLink data-icon="inline-start" aria-hidden="true" />
+            alanrsoares.me
           </Button>
-          {BASICS.profiles.map((profile) => (
-            <Button
-              key={profile.network}
-              variant="outline"
-              size="sm"
-              render={
-                <a
-                  href={profile.url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                />
-              }
-            >
-              {profileIcon(profile.network)}
-              {profile.network}
-            </Button>
-          ))}
           <Button
             variant="outline"
             size="sm"
             render={
-              <a href="/resume.pdf" target="_blank" rel="noopener noreferrer" />
+              <a
+                href={SITE.linkedin}
+                target="_blank"
+                rel="noopener noreferrer"
+              />
             }
           >
-            <FileText data-icon="inline-start" aria-hidden="true" />
-            Resume
+            <Linkedin data-icon="inline-start" aria-hidden="true" />
+            LinkedIn
+          </Button>
+          <Button
+            variant="outline"
+            size="sm"
+            render={<a href={`mailto:${SITE.email}`} />}
+          >
+            <Mail data-icon="inline-start" aria-hidden="true" />
+            {SITE.email}
           </Button>
         </LinkGroup>
       </HeroCopy>
