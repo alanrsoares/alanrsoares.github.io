@@ -1,4 +1,5 @@
 import { useCallback, useEffect, useRef, useState } from "react";
+
 import { useAnimation } from "motion/react";
 
 export function useAvatarTrippy(prefersReducedMotion: boolean | null) {
@@ -39,7 +40,7 @@ export function useAvatarTrippy(prefersReducedMotion: boolean | null) {
     () => () => {
       if (trippyTimeout.current) clearTimeout(trippyTimeout.current);
     },
-    []
+    [],
   );
 
   return { isTrippyActive, imageControls, handleMouseEnter, handleMouseLeave };

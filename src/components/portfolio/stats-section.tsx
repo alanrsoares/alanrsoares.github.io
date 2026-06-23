@@ -11,18 +11,18 @@ export function StatsSection() {
   return (
     <section aria-label="GitHub footprint statistics">
       <StatsGrid>
-        <StatCard value={STATIC_STATS.prsMerged} label="PRs merged" />
-        <StatCard value={STATIC_STATS.reviewsSubmitted} label="Reviews given" />
+        <StatCard label="PRs merged" value={STATIC_STATS.prsMerged} />
+        <StatCard label="Reviews given" value={STATIC_STATS.reviewsSubmitted} />
         <StatCard
-          value={STATIC_STATS.reposContributedTo}
           label="Partner repos"
+          value={STATIC_STATS.reposContributedTo}
         />
-        <StatCard value={STATIC_STATS.yearsOnGitHub} label="Years on GitHub" />
-        <StatCard value={STATIC_STATS.ownOssStars} label="OSS stars" />
+        <StatCard label="Years on GitHub" value={STATIC_STATS.yearsOnGitHub} />
+        <StatCard label="OSS stars" value={STATIC_STATS.ownOssStars} />
         <StatCard
-          value={STATIC_STATS.topOrg.login}
-          label={`Top org · ${STATIC_STATS.topOrg.prContributions} PRs`}
           compact
+          label={`Top org · ${STATIC_STATS.topOrg.prContributions} PRs`}
+          value={STATIC_STATS.topOrg.login}
         />
       </StatsGrid>
     </section>

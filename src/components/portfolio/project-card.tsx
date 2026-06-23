@@ -1,5 +1,5 @@
 import type { ReactNode } from "react";
-import { ExternalLink } from "lucide-react";
+
 import { Badge } from "components/ui/badge";
 import {
   Card,
@@ -10,6 +10,7 @@ import {
   CardHeader,
   CardTitle,
 } from "components/ui/card";
+import { ExternalLink } from "lucide-react";
 
 const projectCardClass =
   "group relative min-h-[180px] transition-all hover:border-accent/45 hover:bg-card-hover hover:-translate-y-0.5 hover:shadow-lg hover:shadow-black/30";
@@ -36,20 +37,21 @@ export function ProjectCard({
   return (
     <Card className={projectCardClass}>
       <a
-        href={href}
-        target="_blank"
-        rel="noopener noreferrer"
-        aria-label={ariaLabel}
         className="absolute inset-0 z-10 rounded-xl focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background"
-      />
+        href={href}
+        rel="noopener noreferrer"
+        target="_blank"
+      >
+        <span className="sr-only">{ariaLabel}</span>
+      </a>
       <CardHeader>
         <CardTitle className="text-lg font-semibold tracking-tight transition-colors group-hover:text-accent">
           {title}
         </CardTitle>
         <CardAction>
           <ExternalLink
-            className="text-muted-foreground transition-colors group-hover:text-accent"
             aria-hidden="true"
+            className="text-muted-foreground transition-colors group-hover:text-accent"
           />
         </CardAction>
       </CardHeader>

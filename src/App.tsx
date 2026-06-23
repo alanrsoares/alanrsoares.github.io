@@ -1,9 +1,9 @@
-import { Separator } from "components/ui/separator";
 import { DeployedPagesSection } from "components/portfolio/deployed-pages-section";
 import { HeroSection } from "components/portfolio/hero-section";
 import { LiveGithubSection } from "components/portfolio/live-github-section";
 import { SiteFooter } from "components/portfolio/site-footer";
 import { StatsSection } from "components/portfolio/stats-section";
+import { Separator } from "components/ui/separator";
 import { useGitHubData } from "src/hooks/use-github-data";
 import { PortfolioPage } from "src/layouts/portfolio-page";
 
@@ -22,14 +22,14 @@ export default function App() {
       <HeroSection />
       <StatsSection />
       <LiveGithubSection
-        repos={repos}
-        loading={loading}
         fromManifest={reposFromManifest}
+        loading={loading}
+        repos={repos}
       />
       <DeployedPagesSection
         deployedPages={deployedPages}
-        loading={pagesLoading}
         fromManifest={pagesFromManifest}
+        loading={pagesLoading}
       />
       <Separator />
       <SiteFooter />

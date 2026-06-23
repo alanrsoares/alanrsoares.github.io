@@ -1,10 +1,13 @@
 import { useId, useMemo } from "react";
-import { motion } from "motion/react";
 
-import AnimatedBlob, { createPaths, mulberry32 } from "components/animated-blob";
+import AnimatedBlob, {
+  createPaths,
+  mulberry32,
+} from "components/animated-blob";
+import { cn } from "components/lib/utils";
 import Starfield from "components/starfield";
 import { useAvatarMotion } from "components/use-avatar-motion";
-import { cn } from "components/lib/utils";
+import { motion } from "motion/react";
 
 const BLOB_SHAPE_TIME = 10;
 const BLOB_PATH_COUNT = 5;
@@ -26,7 +29,7 @@ function useAvatarBlobPaths() {
   const clipId = `blob-clip-${rawId.replace(/:/g, "")}`;
   const blobPaths = useMemo(
     () => createPaths(BLOB_PATH_COUNT, mulberry32(BLOB_SEED)),
-    []
+    [],
   );
   const animateDur = `${BLOB_SHAPE_TIME * blobPaths.length}s`;
   const animateValues = [...blobPaths, blobPaths[0]].join(";");
@@ -80,7 +83,13 @@ type AvatarPortraitProps = {
   motion: ReturnType<typeof useAvatarMotion>;
 };
 
-function AvatarPortrait({ size, src, alt, clipId, motion: m }: AvatarPortraitProps) {
+function AvatarPortrait({
+  size,
+  src,
+  alt,
+  clipId,
+  motion: m,
+}: AvatarPortraitProps) {
   return (
     <motion.div
       className={cn("relative shadow-lg", {

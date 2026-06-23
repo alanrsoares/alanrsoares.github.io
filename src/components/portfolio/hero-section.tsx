@@ -1,7 +1,7 @@
 import tw from "@styled-cva/react";
-import { ExternalLink, Github, Linkedin, Mail } from "lucide-react";
 import Avatar from "components/avatar";
 import { Button } from "components/ui/button";
+import { ExternalLink, Github, Linkedin, Mail } from "lucide-react";
 import { SITE } from "site";
 
 const Hero = tw.header`
@@ -47,48 +47,48 @@ export function HeroSection() {
         <Bio>{SITE.summary}</Bio>
         <LinkGroup>
           <Button
-            variant="outline"
-            size="sm"
             render={
-              <a href={SITE.github} target="_blank" rel="noopener noreferrer" />
+              <a href={SITE.github} rel="noopener noreferrer" target="_blank" />
             }
+            size="sm"
+            variant="outline"
           >
-            <Github data-icon="inline-start" aria-hidden="true" />@{SITE.handle}
+            <Github aria-hidden="true" data-icon="inline-start" />@{SITE.handle}
           </Button>
           <Button
-            variant="outline"
-            size="sm"
             render={
               <a
                 href={SITE.website}
-                target="_blank"
                 rel="noopener noreferrer"
+                target="_blank"
               />
             }
+            size="sm"
+            variant="outline"
           >
-            <ExternalLink data-icon="inline-start" aria-hidden="true" />
+            <ExternalLink aria-hidden="true" data-icon="inline-start" />
             alanrsoares.me
           </Button>
           <Button
-            variant="outline"
-            size="sm"
             render={
               <a
                 href={SITE.linkedin}
-                target="_blank"
                 rel="noopener noreferrer"
+                target="_blank"
               />
             }
+            size="sm"
+            variant="outline"
           >
-            <Linkedin data-icon="inline-start" aria-hidden="true" />
+            <Linkedin aria-hidden="true" data-icon="inline-start" />
             LinkedIn
           </Button>
           <Button
-            variant="outline"
-            size="sm"
             render={<a href={`mailto:${SITE.email}`} />}
+            size="sm"
+            variant="outline"
           >
-            <Mail data-icon="inline-start" aria-hidden="true" />
+            <Mail aria-hidden="true" data-icon="inline-start" />
             {SITE.email}
           </Button>
         </LinkGroup>

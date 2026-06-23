@@ -1,4 +1,5 @@
 import type { ReactNode } from "react";
+
 import tw from "@styled-cva/react";
 
 export const Page = tw.div`relative min-h-screen`;

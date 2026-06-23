@@ -33,11 +33,11 @@ function recentCommitSince(): string {
 
 export async function fetchOwnerRepos(
   owner: string,
-  signal: AbortSignal
+  signal: AbortSignal,
 ): Promise<GhRepo[]> {
   const response = await fetch(
     `https://api.github.com/users/${owner}/repos?per_page=100&sort=pushed&direction=desc&type=owner`,
-    { signal }
+    { signal },
   );
 
   if (!response.ok) {
@@ -52,14 +52,14 @@ async function fetchRecentCommitCount(
   owner: string,
   repo: string,
   since: string,
-  signal: AbortSignal
+  signal: AbortSignal,
 ): Promise<number> {
   let count = 0;
 
   for (let page = 1; page <= 2; page += 1) {
     const response = await fetch(
       `https://api.github.com/repos/${owner}/${repo}/commits?since=${since}&per_page=100&page=${page}`,
-      { signal }
+      { signal },
     );
 
     if (!response.ok) {
@@ -97,10 +97,12 @@ function activityScore(repo: RankedGhRepo): number {
 export async function rankReposByActivity(
   repos: GhRepo[],
   owner: string,
-  signal: AbortSignal
+  signal: AbortSignal,
 ): Promise<GhRepo[]> {
   const since = recentCommitSince();
-  const candidates = [...repos].sort(compareByRecency).slice(0, COMMIT_CANDIDATE_POOL);
+  const candidates = [...repos]
+    .sort(compareByRecency)
+    .slice(0, COMMIT_CANDIDATE_POOL);
 
   const ranked = await Promise.all(
     candidates.map(async (repo) => {
@@ -108,16 +110,14 @@ export async function rankReposByActivity(
         owner,
         repo.name,
         since,
-        signal
+        signal,
       );
 
       return { ...repo, recentCommitCount };
-    })
+    }),
   );
 
-  return ranked
-    .sort((a, b) => activityScore(b) - activityScore(a))
-    .slice(0, 6);
+  return ranked.sort((a, b) => activityScore(b) - activityScore(a)).slice(0, 6);
 }
 
 export function projectPagesUrl(repoName: string): string {
@@ -127,8 +127,7 @@ export function projectPagesUrl(repoName: string): string {
 export function resolveProjectPagesUrl(repo: GhRepo): string {
   const homepage = repo.homepage?.trim();
   if (
-    homepage &&
-    homepage.includes("alanrsoares.github.io/") &&
+    homepage?.includes("alanrsoares.github.io/") &&
     homepage !== GITHUB_PAGES_ORIGIN &&
     homepage !== `${GITHUB_PAGES_ORIGIN}/`
   ) {
@@ -176,8 +175,7 @@ export async function filterDeployedPages(
 ): Promise<DeployedPageRepo[]> {
   const candidates = repos.filter(
     (repo) =>
-      repo.name !== GITHUB_PAGES_USER_SITE_REPO &&
-      (repo.has_pages ?? false),
+      repo.name !== GITHUB_PAGES_USER_SITE_REPO && (repo.has_pages ?? false),
   );
 
   return sweepProjectPages(candidates, signal);
@@ -218,7 +216,10 @@ export async function sweepProjectPages(
   return deployed.sort(compareByRecency);
 }
 
-async function repoPageIsLive(url: string, signal: AbortSignal): Promise<boolean> {
+async function repoPageIsLive(
+  url: string,
+  signal: AbortSignal,
+): Promise<boolean> {
   try {
     const response = await fetch(url, {
       method: "HEAD",

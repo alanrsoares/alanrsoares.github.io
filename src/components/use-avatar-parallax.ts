@@ -1,8 +1,8 @@
-import { useCallback, useRef, type MouseEvent } from "react";
-import { useReducedMotion } from "motion/react";
+import { type MouseEvent, useCallback, useRef } from "react";
 
 import { parallaxFromPointer } from "components/avatar-parallax-math";
 import { useAvatarSprings } from "components/use-avatar-springs";
+import { useReducedMotion } from "motion/react";
 
 export function useAvatarParallax(size: number) {
   const prefersReducedMotion = useReducedMotion();
@@ -24,14 +24,14 @@ export function useAvatarParallax(size: number) {
         y,
         size,
         maxTranslate,
-        maxRotate
+        maxRotate,
       );
       springs.translateXSpring.set(translateX);
       springs.translateYSpring.set(translateY);
       springs.rotateXSpring.set(rotateX);
       springs.rotateYSpring.set(rotateY);
     },
-    [prefersReducedMotion, size, maxTranslate, springs]
+    [prefersReducedMotion, size, maxTranslate, springs],
   );
 
   const resetMotion = useCallback(() => {

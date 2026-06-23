@@ -71,8 +71,7 @@ function projectPagesUrl(repoName: string): string {
 function resolvePagesUrl(repo: ApiRepo): string {
   const homepage = repo.homepage?.trim();
   if (
-    homepage &&
-    homepage.includes("alanrsoares.github.io/") &&
+    homepage?.includes("alanrsoares.github.io/") &&
     homepage !== ORIGIN &&
     homepage !== `${ORIGIN}/`
   ) {
@@ -120,7 +119,9 @@ async function fetchAllRepos(token?: string): Promise<ApiRepo[]> {
     );
 
     if (!response.ok) {
-      throw new Error(`GitHub API ${response.status}: ${await response.text()}`);
+      throw new Error(
+        `GitHub API ${response.status}: ${await response.text()}`,
+      );
     }
 
     const batch: ApiRepo[] = await response.json();
@@ -184,7 +185,9 @@ async function rankActiveRepos(
   token?: string,
 ): Promise<GhRepo[]> {
   const since = recentCommitSince();
-  const candidates = [...repos].sort(compareByRecency).slice(0, COMMIT_CANDIDATE_POOL);
+  const candidates = [...repos]
+    .sort(compareByRecency)
+    .slice(0, COMMIT_CANDIDATE_POOL);
 
   const ranked = await Promise.all(
     candidates.map(async (repo) => {
@@ -217,7 +220,9 @@ async function main() {
   const token = process.env.GITHUB_TOKEN ?? process.env.GH_TOKEN;
   const repos = await fetchAllRepos(token);
   const active = repos
-    .filter((repo) => !repo.fork && !repo.archived && repo.name !== USER_SITE_REPO)
+    .filter(
+      (repo) => !repo.fork && !repo.archived && repo.name !== USER_SITE_REPO,
+    )
     .map(toGhRepo);
 
   const ranked = await rankActiveRepos(active, token);
@@ -226,7 +231,10 @@ async function main() {
 
   const pageCandidates = repos.filter(
     (repo) =>
-      !repo.fork && !repo.archived && repo.name !== USER_SITE_REPO && repo.has_pages,
+      !repo.fork &&
+      !repo.archived &&
+      repo.name !== USER_SITE_REPO &&
+      repo.has_pages,
   );
 
   const verified: DeployedPage[] = [];
@@ -244,7 +252,9 @@ async function main() {
   verified.sort(compareByRecency);
 
   writeFileSync(DEPLOYED_PAGES_OUT, `${JSON.stringify(verified, null, 2)}\n`);
-  console.log(`Wrote ${verified.length} deployed pages to ${DEPLOYED_PAGES_OUT}`);
+  console.log(
+    `Wrote ${verified.length} deployed pages to ${DEPLOYED_PAGES_OUT}`,
+  );
 }
 
 main().catch((err) => {

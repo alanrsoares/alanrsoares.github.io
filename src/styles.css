@@ -32,7 +32,9 @@
   --accent-muted: oklch(var(--theme-hue) / 0.12);
   --success: #10b981;
   --font-sans: "Geist Variable", -apple-system, BlinkMacSystemFont, sans-serif;
-  --font-mono: "Geist Mono", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  --font-mono:
+    "Geist Mono", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
+    monospace;
   --destructive: oklch(55% 0.22 25);
   --destructive-foreground: oklch(98% 0.003 25);
   --border: oklch(24% 0.016 65);
@@ -56,7 +58,6 @@
   --trippy-color-2: oklch(85% 0.18 195);
   --trippy-color-3: oklch(92% 0.2 95);
 }
-
 
 html {
   scroll-behavior: smooth;

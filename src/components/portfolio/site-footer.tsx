@@ -15,10 +15,10 @@ export function SiteFooter() {
         © {new Date().getFullYear()} {SITE.name}
       </span>
       <Button
-        variant="link"
-        size="sm"
         className="h-auto px-0"
         render={<a href={SITE.pagesUrl} />}
+        size="sm"
+        variant="link"
       >
         {SITE.pagesUrl.replace(/^https?:\/\//, "")}
       </Button>

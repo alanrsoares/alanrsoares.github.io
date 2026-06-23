@@ -1,6 +1,7 @@
 import type { ReactNode } from "react";
-import { Card, CardContent } from "components/ui/card";
+
 import { cn } from "components/lib/utils";
+import { Card, CardContent } from "components/ui/card";
 
 type StatCardProps = {
   value: ReactNode;
@@ -11,8 +12,8 @@ type StatCardProps = {
 export function StatCard({ value, label, compact = false }: StatCardProps) {
   return (
     <Card
-      size="sm"
       className="transition-colors hover:border-accent/30 hover:bg-card-hover"
+      size="sm"
     >
       <CardContent className="flex flex-col gap-1.5">
         <div

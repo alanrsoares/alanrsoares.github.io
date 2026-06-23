@@ -20,6 +20,7 @@ Manifests are generated at build time from the GitHub API. Forks and archived re
 ```bash
 bun install
 bun run dev              # http://localhost:5173
+bun run check            # biome lint + tsc
 GITHUB_TOKEN=$(gh auth token) bun run build
 bun run preview
 ```

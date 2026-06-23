@@ -6,18 +6,18 @@ export function parallaxFromPointer(
   y: number,
   size: number,
   maxTranslate: number,
-  maxRotate: number
+  maxRotate: number,
 ) {
   return {
     translateX: clamp(
       (x / (size / 2)) * maxTranslate,
       -maxTranslate,
-      maxTranslate
+      maxTranslate,
     ),
     translateY: clamp(
       (y / (size / 2)) * maxTranslate,
       -maxTranslate,
-      maxTranslate
+      maxTranslate,
     ),
     rotateX: clamp(-(y / (size / 2)) * maxRotate, -maxRotate, maxRotate),
     rotateY: clamp((x / (size / 2)) * maxRotate, -maxRotate, maxRotate),
