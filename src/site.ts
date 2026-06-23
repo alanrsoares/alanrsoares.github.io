@@ -5,6 +5,7 @@ export const SITE = {
   summary:
     "A living index of public repositories and deployed project sites — ranked by recent activity and refreshed from the GitHub API at build time.",
   website: "https://alanrsoares.me",
+  pagesUrl: "https://alanrsoares.github.io",
   github: "https://github.com/alanrsoares",
   linkedin: "https://www.linkedin.com/in/alanrsoares",
   email: "hi@alanrsoares.me",

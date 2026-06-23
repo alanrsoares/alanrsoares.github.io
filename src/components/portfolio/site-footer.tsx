@@ -18,9 +18,9 @@ export function SiteFooter() {
         variant="link"
         size="sm"
         className="h-auto px-0"
-        render={<a href={SITE.website} />}
+        render={<a href={SITE.pagesUrl} />}
       >
-        {SITE.website.replace(/^https?:\/\//, "")}
+        {SITE.pagesUrl.replace(/^https?:\/\//, "")}
       </Button>
     </Footer>
   );
