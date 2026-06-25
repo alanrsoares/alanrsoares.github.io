@@ -2,7 +2,7 @@ import type { ReactNode } from "react";
 
 import tw from "@styled-cva/react";
 
-export const Page = tw.div`relative min-h-screen`;
+export const Page = tw.div`relative min-h-screen overflow-x-hidden`;
 
 export const Background = tw.div`
   theme-ambient-wash pointer-events-none fixed inset-0 z-0
