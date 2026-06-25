@@ -3,7 +3,7 @@ import { Button } from "components/ui/button";
 import { SITE } from "site";
 
 const Footer = tw.footer`
-  flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3
+  flex flex-col items-center text-center sm:flex-row sm:justify-between sm:text-left gap-3
   pt-8 text-sm text-muted-foreground
   animate-fade-up [animation-delay:160ms]
 `;
