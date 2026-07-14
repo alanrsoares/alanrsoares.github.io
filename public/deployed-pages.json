@@ -1,5 +1,18 @@
 [
   {
+    "id": 1299254581,
+    "name": "ganymede",
+    "description": "A deterministic roguelike autobattler rendered with raw WebGPU",
+    "html_url": "https://github.com/alanrsoares/ganymede",
+    "stargazers_count": 0,
+    "forks_count": 0,
+    "language": "TypeScript",
+    "fork": false,
+    "pushed_at": "2026-07-14T02:46:21Z",
+    "updated_at": "2026-07-14T02:46:25Z",
+    "pagesUrl": "https://alanrsoares.github.io/ganymede/"
+  },
+  {
     "id": 1246194166,
     "name": "onrails",
     "description": "Railway-oriented TypeScript",
@@ -8,8 +21,8 @@
     "forks_count": 1,
     "language": "TypeScript",
     "fork": false,
-    "pushed_at": "2026-06-25T02:04:32Z",
-    "updated_at": "2026-06-25T02:04:17Z",
+    "pushed_at": "2026-07-04T14:10:12Z",
+    "updated_at": "2026-07-04T14:10:00Z",
     "pagesUrl": "https://alanrsoares.github.io/onrails/"
   },
   {
@@ -30,12 +43,12 @@
     "name": "prelude-js",
     "description": "functional/point-free utils for JavaScript",
     "html_url": "https://github.com/alanrsoares/prelude-js",
-    "stargazers_count": 100,
+    "stargazers_count": 101,
     "forks_count": 5,
     "language": "TypeScript",
     "fork": false,
     "pushed_at": "2026-06-23T02:23:07Z",
-    "updated_at": "2026-06-23T02:22:52Z",
+    "updated_at": "2026-06-30T09:28:26Z",
     "pagesUrl": "http://alanrsoares.github.io/prelude-js/"
   },
   {
